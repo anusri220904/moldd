@@ -1,59 +1,86 @@
 const allProducts = {
-    affordable_helmet: [
-        { id: 'wall_mount_v1', name: 'Minimalist Wall Mount', price: 499.00, originalPrice: 799.00, description: 'Sleek 3D-printed helmet mount with hidden screws.', images: ['h1.jpg'] },
-        { id: 'eco_stand', name: 'Eco-Series Desk Stand', price: 649.00, originalPrice: 999.00, description: 'Lightweight and durable desktop helmet display.', images: ['e1.jpg'] },
-        { id: 'compact_hook', name: 'Compact Gear Hook', price: 299.00, originalPrice: 450.00, description: 'Space-saving hook for helmets and lightweight jackets.', images: ['h3.jpg'] },
-        { id: 'basic_pedestal', name: 'Standard Pedestal', price: 549.00, originalPrice: 850.00, description: 'Basic elevated stand for open-face helmets.', images: ['h4.jpg'] },
-        { id: 'dual_hanger', name: 'Dual Entry Hanger', price: 799.00, originalPrice: 1200.00, description: 'Sturdy wall mount designed for two helmets.', images: ['h5.jpg'] }
+    'affordable-helmets.html': [
+        { name: 'Lite Wall Mount', appPrice: 799, selPrice: 499, desc: '3D printed minimalist mount.', img: 'h1.jpg' },
+        { name: 'Basic Desk Stand', appPrice: 999, selPrice: 649, desc: 'Sturdy entry-level stand.', img: 'h2.jpg' },
+        { name: 'Gear Hook', appPrice: 450, selPrice: 299, desc: 'Multi-purpose helmet hook.', img: 'h3.jpg' },
+        { name: 'Slim Pedestal', appPrice: 850, selPrice: 549, desc: 'Elegant small-footprint stand.', img: 'h4.jpg' },
+        { name: 'Dual Entry Hanger', appPrice: 1200, selPrice: 799, desc: 'Holds two helmets securely.', img: 'h5.jpg' }
     ],
-    premium_helmet: [
-        { id: 'carbon_throne', name: 'The Carbon Throne', price: 1899.00, originalPrice: 2499.00, description: 'Reinforced 3D-printed pedestal with a metallic finish.', images: ['p1.jpg'] },
-        { id: 'heavy_duty_wall', name: 'Pro Heavy Duty Mount', price: 1499.00, originalPrice: 1999.00, description: 'Supports full-face helmets with integrated gear hook.', images: ['p3.jpg'] },
-        { id: 'viking_stand', name: 'Viking Series Display', price: 2199.00, originalPrice: 2800.00, description: 'Intricately designed Norse-inspired desktop stand.', images: ['p4.jpg'] },
-        { id: 'led_glow_mount', name: 'Lumina LED Mount', price: 2599.00, originalPrice: 3500.00, description: 'Premium wall mount with integrated LED backlighting.', images: ['p5.jpg'] },
-        { id: 'sculpted_armor', name: 'Armor-Plated Stand', price: 2999.00, originalPrice: 4200.00, description: 'High-detail sculpted stand for premium racing helmets.', images: ['p6.jpg'] }
+    'premium-helmets.html': [
+        { name: 'Carbon Throne', appPrice: 2499, selPrice: 1899, desc: 'High-gloss reinforced display.', img: 'p1.jpg' },
+        { name: 'Heavy Duty Mount', appPrice: 1999, selPrice: 1499, desc: 'Industrial strength wall mount.', img: 'p2.jpg' },
+        { name: 'Viking Series', appPrice: 2800, selPrice: 2199, desc: 'Ornate Norse-themed stand.', img: 'p3.jpg' },
+        { name: 'Lumina LED Stand', appPrice: 3500, selPrice: 2599, desc: 'Integrated backlighting.', img: 'p4.jpg' },
+        { name: 'Racing Armor Stand', appPrice: 4200, selPrice: 2999, desc: 'Sculpted aerodynamic design.', img: 'p5.jpg' }
     ],
-    anime_decor: [
-        { id: 'katana_stand', name: 'Katana Desk Display', price: 899.00, originalPrice: 1299.00, description: 'Modern 3D-printed stand for katanas and prop swords.', images: ['a1.jpg'] },
-        { id: 'manga_bookend', name: 'Hero Silhouette Bookends', price: 1199.00, originalPrice: 1650.00, description: 'Functional art to keep your manga collection organized.', images: ['a3.jpg'] },
-        { id: 'kunai_holder', name: 'Hidden Village Rack', price: 699.00, originalPrice: 950.00, description: 'Wall-mounted display for collectible kunai and scrolls.', images: ['a4.jpg'] },
-        { id: 'logo_lamp', name: 'Anime Icon Night Light', price: 1399.00, originalPrice: 1899.00, description: '3D-printed lithophane style lamp of iconic symbols.', images: ['a5.jpg'] },
-        { id: 'keycap_art', name: 'Artisan Keycap Set', price: 449.00, originalPrice: 650.00, description: 'Hand-finished 3D printed keycaps for mechanical keyboards.', images: ['a6.jpg'] }
+    'anime-decor.html': [
+        { name: 'Katana Rack', appPrice: 1299, selPrice: 899, desc: 'Desktop sword display.', img: 'a1.jpg' },
+        { name: 'Hero Bookends', appPrice: 1650, selPrice: 1199, desc: 'Manga collection silouettes.', img: 'a2.jpg' },
+        { name: 'Village Kunai Rack', appPrice: 950, selPrice: 699, desc: 'Ninja tool wall display.', img: 'a3.jpg' },
+        { name: 'Icon Night Light', appPrice: 1899, selPrice: 1399, desc: '3D printed lithophane lamp.', img: 'a4.jpg' },
+        { name: 'Artisan Keycaps', appPrice: 650, selPrice: 449, desc: 'Custom anime keyboard caps.', img: 'a5.jpg' }
     ]
 };
 
-// --- RENDER LOGIC WITH DUAL PRICING ---
-window.renderProducts = function(category) {
-    const productsToRender = allProducts[category];
-    const targetGrid = document.querySelector('.products-grid');
-    if (!targetGrid || !productsToRender) return;
+let cart = JSON.parse(localStorage.getItem('molddCart')) || [];
 
-    targetGrid.innerHTML = productsToRender.map(product => `
+window.renderProducts = function() {
+    const path = window.location.pathname;
+    const fileName = path.substring(path.lastIndexOf('/') + 1);
+    const products = allProducts[fileName];
+    const grid = document.querySelector('.products-grid');
+
+    if (!grid || !products) return;
+
+    grid.innerHTML = products.map(p => `
         <div class="product">
-            <div class="product-slider">
-                <img src="${product.images[0]}" class="active" onerror="this.src='https://placehold.co/400x375?text=Moldd+Product'">
+            <img src="${p.img}" onerror="this.src='https://placehold.co/400?text=Moldd'">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="price-info">
+                <span style="text-decoration:line-through; color:#999;">₹${p.appPrice}</span>
+                <strong style="font-size:1.2rem; margin-left:10px;">₹${p.selPrice}</strong>
             </div>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                <div class="price-info">
-                    <span style="text-decoration: line-through; color: #999; font-size: 0.9rem; margin-right: 8px;">₹${product.originalPrice.toFixed(2)}</span>
-                    <strong style="color: #1A1A1A; font-size: 1.25rem;">₹${product.price.toFixed(2)}</strong>
-                </div>
-                <button class="btn-add" onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
-            </div>
+            <button class="btn-add" onclick="addToCart('${p.name}', ${p.selPrice})">Add to Cart</button>
         </div>
     `).join('');
 };
 
-// Initialization Mapping
+window.addToCart = function(name, price) {
+    cart.push({ name, price });
+    localStorage.setItem('molddCart', JSON.stringify(cart));
+    updateCartDisplay();
+};
+
+window.updateCartDisplay = function() {
+    const list = document.getElementById('cartItems');
+    const totalEl = document.getElementById('cartTotal');
+    const subtotalEl = document.getElementById('cartSubtotal');
+    const waLink = document.getElementById('whatsappLink');
+
+    if (!list) return;
+
+    let subtotal = 0;
+    list.innerHTML = cart.map(item => {
+        subtotal += item.price;
+        return `<li>${item.name} - ₹${item.price}</li>`;
+    }).join('');
+
+    const total = subtotal > 0 ? subtotal + 100 : 0;
+    if (subtotalEl) subtotalEl.innerText = subtotal.toFixed(2);
+    if (totalEl) totalEl.innerText = "₹" + total.toFixed(2);
+
+    let msg = `New Order for Moldd:\n` + cart.map(i => `- ${i.name}`).join('\n') + `\nTotal: ₹${total}`;
+    waLink.href = `https://wa.me/9235698833?text=${encodeURIComponent(msg)}`;
+};
+
+document.getElementById('clearCartBtn')?.addEventListener('click', () => {
+    cart = [];
+    localStorage.removeItem('molddCart');
+    updateCartDisplay();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
-    const path = window.location.pathname;
-    const fileName = path.substring(path.lastIndexOf('/') + 1);
-    const categoryMap = {
-        'affordable-helmets.html': 'affordable_helmet',
-        'premium-helmets.html': 'premium_helmet',
-        'anime-decor.html': 'anime_decor'
-    };
-    if (categoryMap[fileName]) window.renderProducts(categoryMap[fileName]);
+    renderProducts();
+    updateCartDisplay();
 });
