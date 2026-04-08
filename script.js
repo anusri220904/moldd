@@ -15,7 +15,7 @@ const allProducts = {
     ],
     'anime-decor.html': [
         { name: 'Katana Rack', appPrice: 1299, selPrice: 899, desc: 'Desktop sword display.', img: 'a1.jpg' },
-        { name: 'Hero Bookends', appPrice: 1650, selPrice: 1199, desc: 'Manga collection silouettes.', img: 'a2.jpg' },
+        { name: 'Hero Bookends', appPrice: 1650, selPrice: 1199, desc: 'Manga collection silhouettes.', img: 'a2.jpg' },
         { name: 'Village Kunai Rack', appPrice: 950, selPrice: 699, desc: 'Ninja tool wall display.', img: 'a3.jpg' },
         { name: 'Icon Night Light', appPrice: 1899, selPrice: 1399, desc: '3D printed lithophane lamp.', img: 'a4.jpg' },
         { name: 'Artisan Keycaps', appPrice: 650, selPrice: 449, desc: 'Custom anime keyboard caps.', img: 'a5.jpg' }
@@ -25,12 +25,14 @@ const allProducts = {
 let cart = JSON.parse(localStorage.getItem('molddCart')) || [];
 
 window.renderProducts = function() {
+    const grid = document.querySelector('.products-grid');
+    if (!grid) return; // Silent exit if on index.html
+
     const path = window.location.pathname;
     const fileName = path.substring(path.lastIndexOf('/') + 1);
     const products = allProducts[fileName];
-    const grid = document.querySelector('.products-grid');
 
-    if (!grid || !products) return;
+    if (!products) return;
 
     grid.innerHTML = products.map(p => `
         <div class="product">
@@ -70,8 +72,8 @@ window.updateCartDisplay = function() {
     if (subtotalEl) subtotalEl.innerText = subtotal.toFixed(2);
     if (totalEl) totalEl.innerText = "₹" + total.toFixed(2);
 
-    let msg = `I want to Order from Moldd:\n` + cart.map(i => `- ${i.name}`).join('\n') + `\nTotal: ₹${total}`;
-    waLink.href = `https://wa.me/9336222830?text=${encodeURIComponent(msg)}`;
+    let msg = `Order for Moldd:\n` + cart.map(i => `- ${i.name}`).join('\n') + `\nTotal: ₹${total}`;
+    waLink.href = `https://wa.me/9235698833?text=${encodeURIComponent(msg)}`;
 };
 
 document.getElementById('clearCartBtn')?.addEventListener('click', () => {
