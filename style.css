@@ -1,9 +1,7 @@
-/* Base Theme */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #FAF9F6;
     margin: 0;
-    color: #333;
 }
 
 header {
@@ -15,74 +13,50 @@ header {
 
 header h1 {
     font-family: 'Anton', sans-serif;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     margin: 0;
 }
 
-.back-link {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-}
-
-/* THE GRID: 3 on PC, 2 on Mobile */
-.products-grid {
+/* 3 on PC, 2 on Mobile */
+.homepage-sections, .products-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 products on PC */
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
-    padding: 40px 5%;
+    padding: 40px 8%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 @media (max-width: 768px) {
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 products on Mobile */
+    .homepage-sections, .products-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 15px;
-        padding: 20px 3%;
+        padding: 20px 4%;
     }
 }
 
-/* Product Card Styling */
-.product {
+.section-card, .product {
     background: #fff;
     border: 1px solid #EAE8E0;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
 }
 
-.product img {
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border-radius: 2px;
-}
-
-.price-info {
-    margin: 10px 0;
-}
-
-.btn-add {
+.btn-add, .btn-explore {
     background: #1A1A1A;
     color: white;
     border: none;
     padding: 12px;
+    width: 100%;
     cursor: pointer;
     font-weight: 600;
-    transition: 0.3s;
 }
 
-.btn-add:hover {
-    background: #444;
-}
-
-/* Cart Styles */
 .cart-section {
     background: #fff;
-    padding: 3rem 5%;
+    padding: 3rem 8%;
     border-top: 1px solid #eee;
 }
 
@@ -95,4 +69,13 @@ header h1 {
     text-align: center;
     font-weight: bold;
     border-radius: 4px;
+}
+
+.secondary-btn {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    cursor: pointer;
 }
