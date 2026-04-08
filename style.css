@@ -1,0 +1,133 @@
+/* Moldd - Light Elegant Theme */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    background-color: #FAF9F6; /* Bone White */
+    color: #2C2C2C;
+    line-height: 1.6;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+header {
+    background: #FFFFFF;
+    padding: 3rem 1rem;
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    border-bottom: 1px solid #EAE8E0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+header h1 {
+    font-size: 3.5rem;
+    margin: 0;
+    letter-spacing: 6px;
+    color: #1A1A1A;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+header p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: #888888;
+    text-transform: uppercase;
+}
+
+/* Homepage Grid */
+.homepage-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    padding: 4rem 10%;
+    max-width: 1300px;
+    margin: 0 auto;
+    flex-grow: 1;
+}
+
+.section-card {
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: 3rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #F0EFEA;
+    transition: all 0.3s ease;
+}
+
+.section-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border-color: #D4D4D4;
+}
+
+.section-card h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.8rem;
+    color: #1A1A1A;
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+.btn-explore {
+    background: #1A1A1A;
+    color: #FFFFFF;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: 0.3s;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn-explore:hover {
+    background: #444444;
+}
+
+/* Product Section Updates */
+.product {
+    background: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid #EAE8E0;
+}
+
+.price-info strong {
+    color: #1A1A1A;
+    font-size: 1.2rem;
+}
+
+.btn-add {
+    background: #1A1A1A;
+    border-radius: 2px;
+}
+
+/* Cart Customization */
+.cart-section {
+    background-color: #FFFFFF;
+    border-top: 1px solid #EAE8E0;
+    padding: 4rem 10%;
+}
+
+#cartPreview h2 {
+    color: #1A1A1A;
+    font-family: 'Anton', sans-serif;
+}
+
+.cart-btn {
+    background: #27AE60; /* Soft green for WhatsApp */
+    border-radius: 4px;
+}
