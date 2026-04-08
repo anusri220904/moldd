@@ -70,8 +70,8 @@ window.updateCartDisplay = function() {
     if (subtotalEl) subtotalEl.innerText = subtotal.toFixed(2);
     if (totalEl) totalEl.innerText = "₹" + total.toFixed(2);
 
-    let msg = `New Order for Moldd:\n` + cart.map(i => `- ${i.name}`).join('\n') + `\nTotal: ₹${total}`;
-    waLink.href = `https://wa.me/9235698833?text=${encodeURIComponent(msg)}`;
+    let msg = `I want to Order from Moldd:\n` + cart.map(i => `- ${i.name}`).join('\n') + `\nTotal: ₹${total}`;
+    waLink.href = `https://wa.me/9336222830?text=${encodeURIComponent(msg)}`;
 };
 
 document.getElementById('clearCartBtn')?.addEventListener('click', () => {
