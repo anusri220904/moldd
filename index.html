@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moldd | Functional Art for Your Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="loaded">
@@ -42,13 +42,18 @@
             <h2>Your Selection</h2>
             <ul id="cartItems"></ul>
             <div class="order-summary">
+                <p>Subtotal: ₹<span id="cartSubtotal">0.00</span></p>
+                <p>Delivery Charge: ₹100.00</p>
                 <p><strong id="cartTotal">Total: ₹0.00</strong></p>
             </div>
         </div>
-        <a id="whatsappLink" class="cart-btn" href="#" target="_blank">Order via WhatsApp</a>
+        <div class="checkout-area">
+            <a id="whatsappLink" class="cart-btn" href="#" target="_blank">Order via WhatsApp</a>
+            <button id="clearCartBtn" class="secondary-btn">Clear Selection</button>
+        </div>
     </section>
 
-    <footer style="background: #FFFFFF; color: #888; border-top: 1px solid #EEE;">
+    <footer class="footer">
         <p>&copy; 2026 Moldd. Owned by Anurag Srivastav.</p>
     </footer>
 
